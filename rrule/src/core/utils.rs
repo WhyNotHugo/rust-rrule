@@ -97,7 +97,7 @@ mod tests {
     use super::*;
     use chrono::TimeZone;
 
-    const UTC: Tz = Tz::UTC;
+    const UTC: Tz = Tz::from_static(chrono_tz::UTC);
 
     #[test]
     fn in_range_exclusive_start_to_end() {

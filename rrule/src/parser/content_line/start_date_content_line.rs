@@ -12,7 +12,7 @@ use crate::{
     },
 };
 
-const UTC: Tz = Tz::UTC;
+const UTC: Tz = Tz::from_static(chrono_tz::UTC);
 
 #[derive(Debug, PartialEq)]
 pub(crate) struct StartDateContentLine {

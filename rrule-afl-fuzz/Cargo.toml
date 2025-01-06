@@ -12,6 +12,7 @@ rust-version.workspace = true
 [dependencies]
 afl = "*"
 chrono = "0.4.39"
+chrono-tz = "0.10.1"
 num-traits = "0.2.19"
 
 [dependencies.rrule]

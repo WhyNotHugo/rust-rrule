@@ -57,7 +57,7 @@ pub(crate) fn datestring_to_date(
     let datetime: chrono::DateTime<Tz> = if flags.zulu_timezone_set {
         // If a `Z` is present, UTC should be used.
         chrono::DateTime::<chrono::Utc>::from_naive_utc_and_offset(datetime, chrono::Utc)
-            .with_timezone(&Tz::UTC)
+            .with_timezone(&chrono_tz::UTC.into())
     } else {
         // If no `Z` is present, local time should be used.
         use chrono::offset::LocalResult;
@@ -140,7 +140,7 @@ pub(crate) fn parse_weekdays(val: &str) -> Result<Vec<NWeekday>, ParseError> {
 mod tests {
     use super::*;
 
-    const US_PACIFIC: Tz = Tz::US__Pacific;
+    const US_PACIFIC: Tz = Tz::from_static(chrono_tz::US::Pacific);
 
     #[test]
     fn parses_valid_nweekdays() {
@@ -212,12 +212,16 @@ mod tests {
             (
                 "19970902T090000Z",
                 None,
-                Tz::UTC.with_ymd_and_hms(1997, 9, 2, 9, 0, 0).unwrap(),
+                Tz::from(chrono_tz::UTC)
+                    .with_ymd_and_hms(1997, 9, 2, 9, 0, 0)
+                    .unwrap(),
             ),
             (
                 "19970902T090000",
-                Some(Tz::UTC),
-                Tz::UTC.with_ymd_and_hms(1997, 9, 2, 9, 0, 0).unwrap(),
+                Some(Tz::from(chrono_tz::UTC)),
+                Tz::from(chrono_tz::UTC)
+                    .with_ymd_and_hms(1997, 9, 2, 9, 0, 0)
+                    .unwrap(),
             ),
             (
                 "19970902T090000",
@@ -228,7 +232,9 @@ mod tests {
                 "19970902T090000Z",
                 Some(US_PACIFIC),
                 // Timezone is overwritten by the zulu specified in the datetime string
-                Tz::UTC.with_ymd_and_hms(1997, 9, 2, 9, 0, 0).unwrap(),
+                Tz::from(chrono_tz::UTC)
+                    .with_ymd_and_hms(1997, 9, 2, 9, 0, 0)
+                    .unwrap(),
             ),
         ];
 

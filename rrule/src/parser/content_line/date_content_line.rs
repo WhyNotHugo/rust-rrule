@@ -95,7 +95,7 @@ mod tests {
 
     use super::*;
 
-    const UTC: Tz = Tz::UTC;
+    const UTC: Tz = Tz::from_static(chrono_tz::UTC);
 
     #[test]
     fn parses_date_content_line() {

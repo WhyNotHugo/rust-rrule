@@ -55,7 +55,7 @@ fn validate_until(
         Some(until) => {
             match dt_start.timezone() {
                 Tz::Local(_) => {
-                    let allowed_timezones = vec![Tz::LOCAL, Tz::UTC];
+                    let allowed_timezones = vec![Tz::LOCAL, chrono_tz::UTC.into()];
                     if !allowed_timezones.contains(&until.timezone()) {
                         return Err(ValidationError::DtStartUntilMismatchTimezone {
                             dt_start_tz: dt_start.timezone().name().into(),
@@ -68,7 +68,7 @@ fn validate_until(
                     }
                 }
                 Tz::Tz(_) => {
-                    if until.timezone() != Tz::UTC {
+                    if until.timezone() != chrono_tz::UTC.into() {
                         return Err(ValidationError::DtStartUntilMismatchTimezone {
                             dt_start_tz: dt_start.timezone().name().into(),
                             until_tz: until.timezone().name().into(),
@@ -367,7 +367,7 @@ mod tests {
 
     use super::*;
 
-    const UTC: Tz = Tz::UTC;
+    const UTC: Tz = Tz::from_static(chrono_tz::UTC);
 
     #[test]
     fn rejects_by_set_pos_without_byxxx_rule() {
@@ -622,9 +622,9 @@ mod tests {
         }
 
         let tests = [
-            t(Tz::UTC, Tz::LOCAL),
-            t(Tz::Europe__Berlin, Tz::LOCAL),
-            t(Tz::LOCAL, Tz::Europe__Berlin),
+            t(chrono_tz::UTC.into(), Tz::LOCAL),
+            t(chrono_tz::Europe::Berlin.into(), Tz::LOCAL),
+            t(Tz::LOCAL, chrono_tz::Europe::Berlin.into()),
         ];
 
         for (start_date, until) in tests {
