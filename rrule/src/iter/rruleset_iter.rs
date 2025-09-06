@@ -43,9 +43,8 @@ impl RRuleSetIter {
                 loop_counter += 1;
                 if loop_counter >= MAX_ITER_LOOP {
                     log::warn!(
-                        "Reached max loop counter (`{}`). \
-                See 'validator limits' in docs for more info.",
-                        MAX_ITER_LOOP
+                        "Reached max loop counter (`{MAX_ITER_LOOP}`). \
+                See 'validator limits' in docs for more info."
                     );
                     return (None, true);
                 }
@@ -73,9 +72,8 @@ impl RRuleSetIter {
                 loop_counter += 1;
                 if loop_counter >= MAX_ITER_LOOP {
                     log::warn!(
-                        "Reached max loop counter (`{}`). \
-                    See 'validator limits' in docs for more info.",
-                        MAX_ITER_LOOP
+                        "Reached max loop counter (`{MAX_ITER_LOOP}`). \
+                    See 'validator limits' in docs for more info."
                     );
                     return (None, true);
                 }

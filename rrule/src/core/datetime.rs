@@ -47,5 +47,5 @@ pub(crate) fn datetime_to_ical_format(dt: &chrono::DateTime<Tz>) -> String {
     }
 
     let dt = dt.format("%Y%m%dT%H%M%S");
-    format!("{}:{}{}", tz_prefix, dt, tz_postfix)
+    format!("{tz_prefix}:{dt}{tz_postfix}")
 }

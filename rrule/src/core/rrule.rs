@@ -52,7 +52,7 @@ impl Display for Frequency {
             Self::Minutely => "MINUTELY",
             Self::Secondly => "SECONDLY",
         };
-        write!(f, "{}", name)
+        write!(f, "{name}")
     }
 }
 
@@ -188,13 +188,13 @@ impl Display for NWeekday {
             Self::Nth(number, wd) => {
                 let mut wd_str = weekday_to_str(*wd);
                 if *number != 1 {
-                    wd_str = format!("{}{}", number, wd_str);
+                    wd_str = format!("{number}{wd_str}");
                 };
                 wd_str
             }
         };
 
-        write!(f, "{}", weekday)
+        write!(f, "{weekday}")
     }
 }
 
@@ -647,7 +647,7 @@ impl<S> Display for RRule<S> {
         }
 
         if let Some(count) = &self.count {
-            res.push(format!("COUNT={}", count));
+            res.push(format!("COUNT={count}"));
         }
 
         // One interval is the default, no need to expose it.

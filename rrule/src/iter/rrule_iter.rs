@@ -107,9 +107,8 @@ impl RRuleIter {
                     self.finished = true;
                     self.was_limited = true;
                     log::warn!(
-                        "Reached max loop counter (`{}`). \
-                    See 'validator limits' in docs for more info.",
-                        MAX_ITER_LOOP
+                        "Reached max loop counter (`{MAX_ITER_LOOP}`). \
+                    See 'validator limits' in docs for more info."
                     );
                     return true;
                 }

@@ -23,7 +23,7 @@ impl<'a> ContentLineCaptures<'a> {
             }),
             property_name => {
                 let mut parameters = None;
-                if line.starts_with(&format!("{};", property_name)) {
+                if line.starts_with(&format!("{property_name};")) {
                     let only_colon_idx = line.find(':');
                     if let Some(only_colon_idx) = only_colon_idx {
                         parameters =
