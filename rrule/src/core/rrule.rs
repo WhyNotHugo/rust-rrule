@@ -368,6 +368,7 @@ impl RRule<Unvalidated> {
         self.by_month = by_month
             .iter()
             .map(|month| {
+                #[allow(clippy::missing_panics_doc)] // Cannot actually panic.
                 u8::try_from(month.number_from_month()).expect("1-12 is within range of u8")
             })
             .collect();
